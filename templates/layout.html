@@ -21,20 +21,15 @@
   </head>
   <body>
       <nav class="navbar navbar-expand-md bg-info navbar-light">
-      <a class="navbar-brand" href="#">My Website</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-          <li {% if active_page == "home" %} class="nav-item active"{% else %}class="nav-item"{% endif %}>
-            <a class="nav-link" href="/">Home</a>
-          </li>
-        
-        </ul>
+      <a class="navbar-brand" href="/">
+          <img src="../static/images/navbar-logo.png" alt="Bugatti Bollide" style="width:50px;">
+      </a>
+      <form class="form-inline" action="/action_page.php">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-success" type="submit">Search</button>
+  </form>
       </div>
     </nav>
-    {% include 'navbar.html' %}
 
 
     <div id="content">
