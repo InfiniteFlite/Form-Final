@@ -20,6 +20,20 @@
 
   </head>
   <body>
+      <nav class="navbar navbar-expand-md bg-info navbar-light">
+      <a class="navbar-brand" href="#">My Website</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li {% if active_page == "home" %} class="nav-item active"{% else %}class="nav-item"{% endif %}>
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+        </ul>
+      </div>
+    </nav>
     {% include 'navbar.html' %}
 
 
