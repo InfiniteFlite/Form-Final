@@ -1,1 +1,6 @@
-
+.Post{
+    Width:90%;
+    border-color: black;
+    border-width: 5px;
+    border-radius: 2.5px;
+}

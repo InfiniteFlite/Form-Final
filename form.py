@@ -4,15 +4,23 @@ from flask import render_template
 
 import pprint
 import os
+import sys
 import json
+import pymongo
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
 app.debug = True #Change this to False for production
 
 app.secret_key = os.environ['SECRET_KEY']
+connection_string = os.environ["MONGO_CONNECTION_STRING"]
+db_name = os.environ["MONGO_DBNAME"]
 oauth = OAuth(app)
 
+client = pymongo.MongoClient(connection_string)
+db = client[db_name]
+collection = db['Posts']
 
 github = oauth.remote_app(
     'github',
@@ -25,13 +33,22 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize'
 )
 
+def show_posts():
+    divs=""
+    print(collection.count_documents({}))
+    for doc in collection.find():
+        divs+=Markup('<div class="Post">' + doc["Text"] + '<\div>')
+    return divs
+
 @app.context_processor
 def inject_logged_in():
     return {"logged_in":('github_token' in session)}
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    divs = show_posts()
+    print(divs)
+    return render_template('home.html', past_posts = divs)
 
 @app.route('/login')
 def login():
