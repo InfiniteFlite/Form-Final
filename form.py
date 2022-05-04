@@ -50,6 +50,10 @@ def home():
     print(divs)
     return render_template('home.html', past_posts = divs)
 
+@app.route('/test')
+def testing():
+    return render_template('testing.html')
+
 @app.route('/login')
 def login():
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
