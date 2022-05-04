@@ -46,9 +46,9 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    divs = show_posts()
-    print(divs)
-    return render_template('home.html', past_posts = divs)
+    div = show_posts()
+    print(div)
+    return render_template('home.html', past_posts = div)
 
 @app.route('/test')
 def testing():
