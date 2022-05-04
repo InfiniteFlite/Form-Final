@@ -33,6 +33,10 @@ def inject_logged_in():
 def home():
     return render_template('home.html')
 
+@app.route('/test')
+def testing():
+    return render_template('testing.html')
+
 @app.route('/login')
 def login():
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
