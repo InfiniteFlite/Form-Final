@@ -35,9 +35,8 @@ github = oauth.remote_app(
 
 def show_posts():
     divs=""
-    print(collection.count_documents({}))
     for doc in collection.find():
-        divs+=Markup('<div class="Post">' + doc["Text"] + '<\div>')
+        divs+=Markup('<div class="Post">' + doc["Text"] + '</div>')
     return divs
 
 @app.context_processor
@@ -47,7 +46,6 @@ def inject_logged_in():
 @app.route('/')
 def home():
     div = show_posts()
-    print(div)
     return render_template('home.html', past_posts = div)
 
 @app.route('/test')

@@ -1,6 +1,11 @@
 .Post{
-    Width:90%;
+    width:90%;
     border-color: black;
-    border-width: 5px;
+    border-width: 2px;
     border-radius: 2.5px;
+    border-style: solid;
+    margin-top: 2%;
+    margin-left: 2%;
+    background-color: lightgrey;
+    font-size: 20px;
 }
