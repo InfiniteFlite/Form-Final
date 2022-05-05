@@ -17,6 +17,7 @@ app.secret_key = os.environ['SECRET_KEY']
 connection_string = os.environ["MONGO_CONNECTION_STRING"]
 db_name = os.environ["MONGO_DBNAME"]
 oauth = OAuth(app)
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 client = pymongo.MongoClient(connection_string)
 db = client[db_name]
@@ -54,7 +55,7 @@ def testing():
 
 @app.route('/login')
 def login():
-    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
+    return github.authorize(callback=url_for('authorized', _external=True, _scheme='http'))
 
 @app.route('/logout')
 def logout():
@@ -69,6 +70,7 @@ def authorized():
         message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)
     else:
         try:
+            print(resp)
             session['github_token'] = (resp['access_token'], '')
             session['user_data']=github.get('user').data
             message='You were successfully logged in as ' + session['user_data']['login']

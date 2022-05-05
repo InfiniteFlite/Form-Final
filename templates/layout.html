@@ -20,7 +20,19 @@
       <form class="form-inline" action="/">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-success" type="submit">Search</button>
-  </form>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+ 	     {% if logged_in %}
+         <li><p class="navbar-text">Github userid: {{ session['user_data']['login']}}</li>
+ 	     {% endif %}
+         <li>
+ 	  {% if logged_in %}
+ 	  <a href="/logout">Logout</a>
+ 	  {% else %}
+ 	  <a href="/login">Login</a>
+ 	  {% endif %}
+ 	</li>
+       </ul>
       <ul>
           <li>
                <a class="nav-link" href="/test">Test</a>
