@@ -23,6 +23,7 @@ client = pymongo.MongoClient(connection_string)
 db = client[db_name]
 collection = db['Posts']
 
+
 github = oauth.remote_app(
     'github',
     consumer_key=os.environ['GITHUB_CLIENT_ID'],
