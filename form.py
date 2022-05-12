@@ -38,7 +38,7 @@ github = oauth.remote_app(
 def show_posts():
     divs=""
     for doc in collection.find():
-        divs+=Markup('<div class="Post">' + doc["Text"] + '</div>')
+        divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '<div class="card-footer">' + 'This is a footer' + '</div>' + '</div>' + '<br>')
     return divs
 
 @app.context_processor
