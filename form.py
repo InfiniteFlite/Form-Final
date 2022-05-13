@@ -29,6 +29,7 @@ github = oauth.remote_app(
     consumer_key=os.environ['GITHUB_CLIENT_ID'],
     consumer_secret=os.environ['GITHUB_CLIENT_SECRET'],
     request_token_params={'scope': 'user:email'},
+    base_url='https://api.github.com/',
     request_token_url=None,
     access_token_method='POST',
     access_token_url='https://github.com/login/oauth/access_token',
@@ -49,6 +50,11 @@ def inject_logged_in():
 def home():
     div = show_posts()
     return render_template('home.html', past_posts = div)
+
+@app.route('/posted', methods=['POST'])
+def posted():
+
+    return redirect(url_for('/'))
 
 @app.route('/test')
 def testing():

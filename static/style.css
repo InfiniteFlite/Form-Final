@@ -1,4 +1,13 @@
 .card{
-    margin:auto;
-    width:50%
+    margin:1%;
+    width:60%;
+    float:left;
+}
+
+#postbutton{
+    float:right;
+    vertical-align: top;
+}
+
+.modal{
 }
