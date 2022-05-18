@@ -42,19 +42,24 @@ def show_posts():
         divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '<div class="card-footer">' + 'This is a footer' + '</div>' + '</div>' + '<br>')
     return divs
 
+def process_post(post):
+    collection.insert_one({"Name" : session['user_data']['login'], "Text" : post})
+    return
+
 @app.context_processor
 def inject_logged_in():
     return {"logged_in":('github_token' in session)}
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     div = show_posts()
     return render_template('home.html', past_posts = div)
 
 @app.route('/posted', methods=['POST'])
 def posted():
-
-    return redirect(url_for('/'))
+    p = request.form['post']
+    process_post(p)
+    return redirect(url_for('/', code=307))
 
 @app.route('/test')
 def testing():

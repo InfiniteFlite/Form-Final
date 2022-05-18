@@ -20,12 +20,12 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form action="/posted">
+        <form action="/posted" method="post">
         <div class="form-group">
             <label for="post">Post:</label>
-            <input type="text" class="form-control" placeholder="Enter text" id="post">
+            <input type="text" class="form-control" placeholder="Enter text" name="post">
         </div>
-            <button type="submit" class="btn btn-primary" method="post">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
       <div class="modal-footer">
