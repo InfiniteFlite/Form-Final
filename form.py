@@ -61,6 +61,11 @@ def posted():
     process_post(p)
     return redirect(url_for("home", code=307))
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+
+    return redirect(url_for("home", code=307))
+
 @app.route('/test')
 def testing():
     return render_template('testing.html')
