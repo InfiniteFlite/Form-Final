@@ -59,7 +59,7 @@ def home():
 def posted():
     p = request.form['post']
     process_post(p)
-    return redirect(url_for('/', code=307))
+    return redirect(url_for("home", code=307))
 
 @app.route('/test')
 def testing():
