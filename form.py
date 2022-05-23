@@ -36,11 +36,17 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize'
 )
 
-def show_posts():
+def show_posts(search):
     divs=""
-    for doc in collection.find():
-        divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '<div class="card-footer">' + 'This is a footer' + '</div>' + '</div>' + '<br>')
-    return divs
+    if search == "":
+        for doc in collection.find():
+            divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '<div class="card-footer">' + 'This is a footer' + '</div>' + '</div>' + '<br>')
+        return divs
+    else:
+        for doc in collection.find():
+            if search in doc["Text"]:
+                divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '<div class="card-footer">' + 'This is a footer' + '</div>' + '</div>' + '<br>')
+        return divs
 
 def process_post(post):
     collection.insert_one({"Name" : session['user_data']['login'], "Text" : post})
@@ -52,7 +58,7 @@ def inject_logged_in():
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    div = show_posts()
+    div = show_posts("")
     return render_template('home.html', past_posts = div)
 
 @app.route('/posted', methods=['POST'])
@@ -63,8 +69,9 @@ def posted():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-
-    return redirect(url_for("home", code=307))
+    s = request.form['search']
+    div = show_posts(s)
+    return render_template('home.html', past_posts = div)
 
 @app.route('/test')
 def testing():
