@@ -7,8 +7,9 @@
 #postbutton{
     float:right;
     vertical-align: top;
-    
+
 }
 
-.modal{
+.reply{
+    border: 1px solid silver;
 }

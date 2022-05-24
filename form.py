@@ -36,16 +36,30 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize'
 )
 
+def process_reply(reply):
+
+    return
+
 def show_posts(search):
     divs=""
     if search == "":
         for doc in collection.find():
-            divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '<div class="card-footer">' + 'This is a footer' + '</div>' + '</div>' + '<br>')
+            divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>')
+            if "Replies" in doc:
+                for r in doc["Replies"]:
+                    divs+=Markup('<div class="card-body reply">' + '<p>' + r + '</p>' + '</div>')
+            if 'github_token' in session:
+                divs+=Markup('<div class="card-footer">' + '<form class="form-inline" action="/reply" method="post">' + '<input class="form-control mr-sm-2" type="text" placeholder="Reply" name="reply">' + '<button class="btn btn-primary" name="ID" value="' + str(doc["_id"]) + '" ' + 'type="submit">' + 'Reply' + '</button>' + '</form>' + '</div>' + '</div>' + '<br>')
+            else:
+                divs+=Markup( + '</div>' + '<br>')
         return divs
     else:
         for doc in collection.find():
             if search in doc["Text"]:
-                divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '<div class="card-footer">' + 'This is a footer' + '</div>' + '</div>' + '<br>')
+                if 'github_token' in session:
+                    divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '<div class="card-footer">' + '<form class="form-inline" action="/reply" method="post">' + '<input class="form-control mr-sm-2" type="text" placeholder="Reply" name="reply">' + '<button class="btn btn-primary" name="ID" value=' + str(doc["_id"]) + 'type="submit">' + 'Reply' + '</button>' + '</form>' + '</div>' + '</div>' + '<br>')
+                else:
+                    divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>' + '</div>' + '<br>')
         return divs
 
 def process_post(post):
@@ -71,6 +85,13 @@ def posted():
 def search():
     s = request.form['search']
     div = show_posts(s)
+    return render_template('home.html', past_posts = div)
+
+@app.route('/reply', methods=['GET', 'POST'])
+def reply():
+    r = request.form["reply"]
+    process_reply(r)
+    div = show_posts("")
     return render_template('home.html', past_posts = div)
 
 @app.route('/test')
