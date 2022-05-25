@@ -1,17 +1,20 @@
-
-{% extends "layout.html" %}
+<!--{% extends "layout.html" %}-->
 
 {% block title %}Forum{% endblock %}
 
 {% block content %}
 <head>
- <title>Bootstrap Example</title>
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='testing.css') }}">
+  <title>{% block title %}{% endblock %}</title>
+
+
 </head>
 <body>
 
@@ -80,11 +83,28 @@
     <br>
     <br>
 <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
-<script>
-$(document).ready(function(){
-  $('[data-toggle="popover"]').popover();
-});
-</script>
+
+
+
+
+<ul class="menu cf">
+<li><a href="https://www.blogger.com/blogger.g?blogID=1719501309664700552">Home</a></li>
+<li>
+        <a href="https://www.blogger.com/blogger.g?blogID=1719501309664700552">Services</a>
+        <ul class="submenu">
+<li><a href="https://www.blogger.com/blogger.g?blogID=1719501309664700552">Login</a></li>
+<li><a href="https://www.blogger.com/blogger.g?blogID=1719501309664700552">Post</a></li>
+<li><a href="https://www.blogger.com/blogger.g?blogID=1719501309664700552">All posts</a></li>
+</ul>
+</li>
+<li><a href="https://www.blogger.com/blogger.g?blogID=1719501309664700552">Blog</a></li>
+<li><a href="https://www.blogger.com/blogger.g?blogID=1719501309664700552">About us</a></li>
+<li><a href="https://www.blogger.com/blogger.g?blogID=1719501309664700552">Contact us</a></li>
+</ul>
+
+
+
+
 
 </body>
   {{ past_posts }}
