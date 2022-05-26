@@ -1,70 +1,64 @@
-<!--{% extends "layout.html" %}-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+      <link rel="stylesheet" href="{{ url_for('static', filename='testing2.css') }}">
+    </head>
 
-{% block title %}Forum{% endblock %}
-
-{% block content %}
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='testing2.css') }}">
-  <title>{% block title %}{% endblock %}</title>
+<!-- code cam from https://codepen.io/alphardex/pen/NWxNyXb -->
 
 
-</head>
-<body>
-<h1>Click the burger menu to see the magic.</h1>
-<input type="checkbox" id="burger-toggle">
-<label for="burger-toggle" class="burger-menu">
-  <div class="line"></div>
-  <div class="line"></div>
-  <div class="line"></div>
-</label>
-<div class="menu">
-  <div class="menu-inner">
-    <ul class="menu-nav">
-      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
-            <div>Home</div>
-          </span></a></li>
-      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
-            <div>About</div>
-          </span></a></li>
-      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
-            <div>Service</div>
-          </span></a></li>
-      <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
-            <div>Team</div>
-          </span></a></li>
-    </ul>
-    <div class="gallery">
-      <div class="title">
-        <p>Sora Gallery</p>
-      </div>
-      <div class="images">
-        <a class="image-link" href="#">
-          <div class="image" data-label="Star"><img src="https://i.loli.net/2019/11/23/cnKl1Ykd5rZCVwm.jpg" alt=""></div>
-        </a>
-        <a class="image-link" href="#">
-          <div class="image" data-label="Sun"><img src="https://i.loli.net/2019/11/16/FLnzi5Kq4tkRZSm.jpg" alt=""></div>
-        </a>
-        <a class="image-link" href="#">
-          <div class="image" data-label="Tree"><img src="https://i.loli.net/2019/10/18/uXF1Kx7lzELB6wf.jpg" alt=""></div>
-        </a>
-        <a class="image-link" href="#">
-          <div class="image" data-label="Sky"><img src="https://i.loli.net/2019/10/18/buDT4YS6zUMfHst.jpg" alt=""></div>
-        </a>
+    <h1>Click the burger menu to see the magic.</h1>
+    <input type="checkbox" id="burger-toggle">
+    <label for="burger-toggle" class="burger-menu">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </label>
+    <div class="menu">
+      <div class="menu-inner">
+        <ul class="menu-nav">
+          <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
+                <div>Home</div>
+              </span></a></li>
+          <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
+                <div>About</div>
+              </span></a></li>
+          <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
+                <div>Service</div>
+              </span></a></li>
+          <li class="menu-nav-item"><a class="menu-nav-link" href="#"><span>
+                <div>Team</div>
+              </span></a></li>
+        </ul>
+        <div class="gallery">
+          <div class="title">
+            <p>Sora Gallery</p>
+          </div>
+          <div class="images">
+            <a class="image-link" href="#">
+              <div class="image" data-label="Star"><img src="https://i.loli.net/2019/11/23/cnKl1Ykd5rZCVwm.jpg" alt=""></div>
+            </a>
+            <a class="image-link" href="#">
+              <div class="image" data-label="Sun"><img src="https://i.loli.net/2019/11/16/FLnzi5Kq4tkRZSm.jpg" alt=""></div>
+            </a>
+            <a class="image-link" href="#">
+              <div class="image" data-label="Tree"><img src="https://i.loli.net/2019/10/18/uXF1Kx7lzELB6wf.jpg" alt=""></div>
+            </a>
+            <a class="image-link" href="#">
+              <div class="image" data-label="Sky"><img src="https://i.loli.net/2019/10/18/buDT4YS6zUMfHst.jpg" alt=""></div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 
-</body>
-  {{ past_posts }}
 
-
-{% endblock %}
+</html>
