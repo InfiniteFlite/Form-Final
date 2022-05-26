@@ -37,10 +37,12 @@ github = oauth.remote_app(
 )
 
 def process_reply(reply, id):
-    collection.updateOne(
-  { _id : ObjectId(id) },
-  { '$push': { Replies: session['user_data']['login'] + " : " + reply } }
+    print(id)
+    result = collection.update_one(
+  { '_id' : ObjectId(id) },
+  { '$push': { 'Replies': session['user_data']['login'] + " : " + reply } }
 )
+    print(result.matched_count)
     return
 
 def show_posts(search):
