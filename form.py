@@ -36,8 +36,11 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize'
 )
 
-def process_reply(reply):
-
+def process_reply(reply, id):
+    collection.updateOne(
+  { _id : ObjectId(id) },
+  { '$push': { Replies: session['user_data']['login'] + " : " + reply } }
+)
     return
 
 def show_posts(search):
@@ -51,7 +54,7 @@ def show_posts(search):
             if 'github_token' in session:
                 divs+=Markup('<div class="card-footer">' + '<form class="form-inline" action="/reply" method="post">' + '<input class="form-control mr-sm-2" type="text" placeholder="Reply" name="reply">' + '<button class="btn btn-primary" name="ID" value="' + str(doc["_id"]) + '" ' + 'type="submit">' + 'Reply' + '</button>' + '</form>' + '</div>' + '</div>' + '<br>')
             else:
-                divs+=Markup( + '</div>' + '<br>')
+                divs+=Markup('</div>' + '<br>')
         return divs
     else:
         for doc in collection.find():
@@ -90,7 +93,8 @@ def search():
 @app.route('/reply', methods=['GET', 'POST'])
 def reply():
     r = request.form["reply"]
-    process_reply(r)
+    id = request.form['ID']
+    process_reply(r, id)
     div = show_posts("")
     return render_template('home.html', past_posts = div)
 
