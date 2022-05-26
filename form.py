@@ -102,6 +102,10 @@ def reply():
 def testing():
     return render_template('testing.html')
 
+@app.route('/test2')
+def testing2():
+    return render_template('testing2.html')
+
 @app.route('/login')
 def login():
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='http'))
