@@ -49,7 +49,10 @@ def show_posts(search):
     divs=""
     if search == "":
         for doc in collection.find():
-            divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4>' + doc["Name"] + '</h4>' + '</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>')
+            divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4 class="float-left">' + doc["Name"] + '</h4>')
+            if 'github_token' in session and doc["Name"] == session['user_data']['login']:
+                divs+=Markup('<form aciton="/delete" method="post">' + '<button type="submit" class="btn btn-danger float-right" name="ID" value="' + str(doc["_id"]) + '" ' + '>DELETE</button>' + '</form>')
+            divs+=Markup('</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>')
             if "Replies" in doc:
                 for r in doc["Replies"]:
                     divs+=Markup('<div class="card-body reply">' + '<p>' + r + '</p>' + '</div>')
@@ -69,6 +72,10 @@ def show_posts(search):
 
 def process_post(post):
     collection.insert_one({"Name" : session['user_data']['login'], "Text" : post})
+    return
+
+def process_deletion(id):
+    collection.delete_one({"_id" : ObjectId(id)})
     return
 
 @app.context_processor
@@ -98,7 +105,13 @@ def reply():
     id = request.form['ID']
     process_reply(r, id)
     div = show_posts("")
-    return render_template('home.html', past_posts = div)
+    return redirect(url_for("home", code=307))
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    id = request.form['ID']
+    process_deletion(id)
+    return redirect(url_for("home", code=307))
 
 @app.route('/test')
 def testing():
