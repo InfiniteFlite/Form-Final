@@ -37,7 +37,6 @@ github = oauth.remote_app(
 )
 
 def process_reply(reply, id):
-    print(id)
     result = collection.update_one(
   { '_id' : ObjectId(id) },
   { '$push': { 'Replies': session['user_data']['login'] + " : " + reply } }
@@ -51,7 +50,7 @@ def show_posts(search):
         for doc in collection.find():
             divs+=Markup('<div class="card">' + '<div class="card-header">' + '<h4 class="float-left">' + doc["Name"] + '</h4>')
             if 'github_token' in session and doc["Name"] == session['user_data']['login']:
-                divs+=Markup('<form aciton="/delete" method="post">' + '<button type="submit" class="btn btn-danger float-right" name="ID" value="' + str(doc["_id"]) + '" ' + '>DELETE</button>' + '</form>')
+                divs+=Markup('<form action="/delete" method="post">' + '<button type="submit" class="btn btn-danger float-right" name="ID" value="' + str(doc["_id"]) + '" ' + '>DELETE</button>' + '</form>')
             divs+=Markup('</div>' + '<div class="card-body">' + '<p>' + doc["Text"] + '</p>' + '</div>')
             if "Replies" in doc:
                 for r in doc["Replies"]:
@@ -109,6 +108,7 @@ def reply():
 
 @app.route('/delete', methods=['GET', 'POST'])
 def delete():
+    print("deleting")
     id = request.form['ID']
     process_deletion(id)
     return redirect(url_for("home", code=307))
