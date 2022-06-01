@@ -81,22 +81,26 @@ def process_deletion(id):
 def inject_logged_in():
     return {"logged_in":('github_token' in session)}
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+def testing():
+    return render_template('home.html')
+
+@app.route('/form', methods=['GET', 'POST'])
 def home():
     div = show_posts("")
-    return render_template('home.html', past_posts = div)
+    return render_template('form.html', past_posts = div)
 
 @app.route('/posted', methods=['POST'])
 def posted():
     p = request.form['post']
     process_post(p)
-    return redirect(url_for("home", code=307))
+    return redirect(url_for("form", code=307))
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     s = request.form['search']
     div = show_posts(s)
-    return render_template('home.html', past_posts = div)
+    return render_template('form.html', past_posts = div)
 
 @app.route('/reply', methods=['GET', 'POST'])
 def reply():
@@ -104,30 +108,19 @@ def reply():
     id = request.form['ID']
     process_reply(r, id)
     div = show_posts("")
-    return redirect(url_for("home", code=307))
+    return redirect(url_for("form", code=307))
 
 @app.route('/delete', methods=['GET', 'POST'])
 def delete():
     print("deleting")
     id = request.form['ID']
     process_deletion(id)
-    return redirect(url_for("home", code=307))
+    return redirect(url_for("form", code=307))
 
-@app.route('/test')
-def testing():
-    return render_template('testing.html')
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-@app.route('/test2')
-def testing2():
-    return render_template('testing2.html')
-
-@app.route('/mixing')
-def mixingNav():
-    return render_template('mixingNav.html')
-
-@app.route('/sign')
-def signIn():
-    return render_template('signIn.html')
 
 @app.route('/login')
 def login():

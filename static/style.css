@@ -13,3 +13,23 @@
 .reply{
     border: 1px solid silver;
 }
+
+#aboutDiv{
+    width:40%;
+    border:1px solid silver;
+    margin:auto;
+}
+
+.aboutImage{
+    margin-top:3%;
+    margin-left:25%;
+}
+
+#aboutBackBtn{
+    margin-left:48%;
+    margin-top:2%;
+}
+
+#homeBody{
+    background-color: silver;
+}

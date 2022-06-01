@@ -15,7 +15,7 @@
   </head>
   <body>
       <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="/form">
           <img src="../static/images/navbar-logo.png" alt="Bugatti Bollide" style="width:50px;">
       </a>
       <form class="form-inline d-flex justify-content-center" id="searchbar" action="/">
@@ -24,7 +24,7 @@
       </form>
       <ul class="nav navbar-nav navbar-right d-flex justify-content-right">
       <li class="nav-item">
-          <a class="nav-link" href="/test">Test</a>
+          <a class="nav-link" href="/">Home</a>
       </li>
  	     {% if logged_in %}
          <li class="nav-item"><p class="navbar-text">{{ session['user_data']['login']}}</li>
