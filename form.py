@@ -17,7 +17,6 @@ app.secret_key = os.environ['SECRET_KEY']
 connection_string = os.environ["MONGO_CONNECTION_STRING"]
 db_name = os.environ["MONGO_DBNAME"]
 oauth = OAuth(app)
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 client = pymongo.MongoClient(connection_string)
 db = client[db_name]
@@ -124,7 +123,7 @@ def about():
 
 @app.route('/login')
 def login():
-    return github.authorize(callback=url_for('authorized', _external=True, _scheme='http'))
+    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
 
 @app.route('/logout')
 def logout():
