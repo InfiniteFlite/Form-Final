@@ -120,10 +120,14 @@ def testing():
 @app.route('/test2')
 def testing2():
     return render_template('testing2.html')
-    
+
 @app.route('/mixing')
 def mixingNav():
     return render_template('mixingNav.html')
+
+@app.route('/sign')
+def signIn():
+    return render_template('signIn.html')
 
 @app.route('/login')
 def login():
